@@ -1,0 +1,36 @@
+{
+  "name": "component-reviews-bl",
+  "version": "1.0.0",
+  "description": "Review componenet for Skybnb",
+  "main": "index.jsx",
+  "scripts": {
+    "start": "nodemon server/server.js",
+    "build": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sky-bnb/component-reviews-bl.git"
+  },
+  "author": "Brian L",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sky-bnb/component-reviews-bl/issues"
+  },
+  "homepage": "https://github.com/sky-bnb/component-reviews-bl#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.19.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.13.0",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2"
+  }
+}
