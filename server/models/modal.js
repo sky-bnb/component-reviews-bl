@@ -9,16 +9,12 @@ db.once('open', () => {
   console.log('MongoDB connected');
 });
 
-const getHouse = (id) => {
-  return Review.find({ house_id: id })
-    .then((data) => {
-      return data
-    })
-    .catch((err) => {
-      console.log(err, 'error');
-    });
-}
+const getHouse = id => Review.find({ house_id: id })
+  .then(data => data)
+  .catch((err) => {
+    console.log(err, 'error');
+  });
 
 module.exports = {
-  getHouse
-}
+  getHouse,
+};
