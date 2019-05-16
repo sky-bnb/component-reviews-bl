@@ -14,7 +14,7 @@ db.once('open', () => {
   const randomNum = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
   const promise = [];
-  for (let i = 0; i <= 100; i += 1) {
+  for (let i = 1; i <= 200; i += 1) {
     const houseObj = {
       house_id: i,
       accuracy: randomNum(20, 50),
