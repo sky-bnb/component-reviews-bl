@@ -1,17 +1,24 @@
-// var mongoose = require('mongoose');
-// const  { Review } = require('../orm_schema');
+const mongoose = require('mongoose');
+const { Review } = require('../orm_schema');
 
-// const getHouse = (id) => {
-//   return Review.find({ house_id: id })
-//     .then((data) => {
-//       console.log(data)
-//       return data
-//     })
-//     .catch((err) => {
-//       console.log(err, 'error');
-//     });
-// }
+mongoose.connect('mongodb://localhost/reviews', { useNewUrlParser: true });
 
-// module.exports = {
-//   getHouse
-// }
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log('MongoDB connected');
+});
+
+const getHouse = (id) => {
+  return Review.find({ house_id: id })
+    .then((data) => {
+      return data
+    })
+    .catch((err) => {
+      console.log(err, 'error');
+    });
+}
+
+module.exports = {
+  getHouse
+}
