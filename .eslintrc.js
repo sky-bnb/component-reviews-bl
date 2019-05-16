@@ -3,6 +3,7 @@ module.exports = {
         "browser": true,
         "es6": true
     },
+    "extends": "airbnb",
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -18,10 +19,11 @@ module.exports = {
         "react"
     ],
     "rules": {
-      "eslint":"recommended",
-      "plugin":"react/recommended",
-      "indent": ["error", 2],
-      "quotes": ["error", "single"],
-      "comma-dangle": ["error"]
+        "eslint":"recommended",
+        "plugin":"react/recommended",
+        "indent": ["error", 2],
+        "quotes": ["error", "single"],
+        "comma-dangle": ["error"],
+        "no-console": "off"
     }
 };
