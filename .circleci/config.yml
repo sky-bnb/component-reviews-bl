@@ -3,7 +3,7 @@ jobs:
   build:
    branches:
      only:
-       - master
+       - api-route/test_suite
      working_directory: ~/tmp
      docker: 
        - image: circleci/node:9.9
