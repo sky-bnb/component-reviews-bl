@@ -1,6 +1,13 @@
 {
   "name": "component-reviews-bl",
   "jest": {
+    "setupFilesAfterEnv": [
+      "./node_modules/jest-enzyme/lib/index.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    },
     "verbose": true
   },
   "version": "1.0.0",
@@ -23,19 +30,25 @@
   },
   "homepage": "https://github.com/sky-bnb/component-reviews-bl#readme",
   "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.19.0",
     "express": "^4.16.4",
     "faker": "^4.1.0",
-    "mongoose": "^5.5.8",
+    "jest-enzyme": "^7.0.2",
+    "mongoose": "^5.5.9",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.17.2",

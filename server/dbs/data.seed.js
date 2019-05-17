@@ -3,7 +3,6 @@ const faker = require('faker');
 const { Review } = require('../orm_schema');
 
 mongoose.connect('mongodb://localhost/reviews', { useNewUrlParser: true });
-
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
@@ -11,10 +10,15 @@ db.once('open', () => {
   // NO NEED TO DROP THE DB BECAUSE IT WILL RESET THE DATA EVERY TIME THE SCRIPT IS RAN
   // db.dropDatabase();
 
-  const randomNum = (min, max) => Math.floor(Math.random() * (max - min) + min);
+  const randomNum = (min, max) => Math.floor(Math.random() * (max + 1 - min) + min);
+
+  const monthGenerator = () => {
+    const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Decemeber'];
+    return `${month[randomNum(0, 11)]} ${randomNum(2010, 2019)}`;
+  };
 
   const promise = [];
-  for (let i = 101; i <= 200; i += 1) {
+  for (let i = 101; i <= 201; i += 1) {
     const houseObj = {
       house_id: i,
       accuracy: randomNum(20, 50),
@@ -33,7 +37,7 @@ db.once('open', () => {
           name: faker.name.findName(),
           avatar: faker.image.avatar(),
           review: faker.lorem.sentences(randomNum(3, 7)),
-          date_created: faker.date.past(2),
+          date_created: monthGenerator(),
         };
         houseObj.reviews.push(reviewObj);
       }
