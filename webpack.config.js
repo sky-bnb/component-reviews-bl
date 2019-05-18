@@ -22,9 +22,13 @@ module.exports = {
         ],
 
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   resolve: {
-    extensions: ['.js', '.json', '.jsx'],
+    extensions: ['.js', '.json', '.jsx', 'css'],
   },
 };

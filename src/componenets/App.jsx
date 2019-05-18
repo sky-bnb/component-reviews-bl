@@ -2,6 +2,7 @@
 /* eslint-disable no-useless-constructor */
 import React from 'react';
 import axios from 'axios';
+import '../App.css';
 
 class App extends React.Component {
   constructor() {
@@ -24,8 +25,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-       hi
+      <div className='panda'>
+        <p>This text will be blue</p>
       </div>
     );
   }
