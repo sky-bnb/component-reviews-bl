@@ -1,0 +1,41 @@
+.userAv img {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.userInfo {
+  margin-left: 16px;
+}
+
+.userName {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  line-height: 1.375em !important;
+}
+
+.reviewDate {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.2857142857142858em !important;
+}
+
+.top {
+  display: flex;
+}
+
+.mid {
+  margin-top: 16px;
+  margin-top: 5px;
+}
+
+.bottom .line {
+  border: solid #ebebeb;
+  border-width: 1px;
+  border-top: 1px;
+  border-right: 1px;
+  border-left: 1px;
+  margin: 10px 0px 25px 0px;
+}
+
+
