@@ -6,7 +6,7 @@ import axios from 'axios';
 import '../App.css';
 
 import Ratings from './Ratings';
-import AllReviews from './AllReviews';
+import ReviewList from './ReviewList';
 import NavBar from './NavBar';
 import Stars from './Stars';
 
@@ -76,7 +76,7 @@ class App extends React.Component {
               <Ratings rating={six} />
             </div>
           </div>
-          <AllReviews />
+          <ReviewList />
           <div className="bottomNav">
             <div className="scrollBar">
               <span>
