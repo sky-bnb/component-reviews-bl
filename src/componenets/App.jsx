@@ -1,20 +1,25 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-useless-constructor */
 import React from 'react';
 import axios from 'axios';
 import '../App.css';
 
-import Stars from './Stars';
+import Ratings from './Ratings';
 import AllReviews from './AllReviews';
 import NavBar from './NavBar';
+import Stars from './Stars';
 
 class App extends React.Component {
   constructor() {
     super();
+    this.state = {
+      rating: ['Accuracy', 'Communication', 'Cleanliness', 'Location', 'Check-in', 'Value'],
+    };
   }
 
   componentDidMount() {
-    this.fetchData();
+    // this.fetchData();
   }
 
   fetchData() {
@@ -28,16 +33,26 @@ class App extends React.Component {
   }
 
   render() {
+    const [one, two, three, four, five, six] = this.state.rating;
     return (
       <section className="container">
         <div className="topReview">
           <div className="houseStars">
-            76 REVIEWS STAR STAR STAR
-          </div>
-          <div className="search">
+            <h2 className="numReviews">
+              <span className="reviewStar">
+                76 Reviews
+              </span>
+            </h2>
             <div>
+              <span>
+                <Stars />
+              </span>
+            </div>
+          </div>
+          <div>
+            <div className="search">
               <div className="magnifi">
-                Goes here
+                <i className="fas fa-search" />
               </div>
               <div className="input">
                 <input type="text" className="inputBox" placeholder="Search reviews" />
@@ -45,17 +60,20 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+        <div className="border">
+          <div className="line">&nbsp;</div>
+        </div>
         <div className="bottomReview">
           <div className="allStars">
             <div className="leftStars">
-              <Stars />
-              <Stars />
-              <Stars />
+              <Ratings rating={one} />
+              <Ratings rating={two} />
+              <Ratings rating={three} />
             </div>
             <div className="rightStars">
-              <Stars />
-              <Stars />
-              <Stars />
+              <Ratings rating={four} />
+              <Ratings rating={five} />
+              <Ratings rating={six} />
             </div>
           </div>
           <AllReviews />
@@ -64,12 +82,8 @@ class App extends React.Component {
               <span>
                 <NavBar />
               </span>
-
             </div>
-            
           </div>
-
-
         </div>
       </section>
     );
