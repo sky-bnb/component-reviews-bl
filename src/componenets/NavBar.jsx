@@ -4,13 +4,13 @@ const NavBar = () => (
   <div className="navBar">
     <ul>
       <li>
-        <button>back</button>
+        <button type="submit">back</button>
       </li>
       <li>
-        <button>1</button>
+        <button type="submit">1</button>
       </li>
       <li>
-        <button>back</button>
+        <button type="submit">back</button>
       </li>
     </ul>
   </div>
