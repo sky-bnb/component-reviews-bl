@@ -13,7 +13,7 @@ class Stars extends React.Component {
   }
 
   componentDidMount() {
-    this.stars(25);
+    this.stars(45);
   }
 
   stars(num) {
