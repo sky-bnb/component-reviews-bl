@@ -1,0 +1,20 @@
+.starRow {
+  justify-content: space-between;
+  padding: 10px 0px 10px 0px;
+  display: flex;
+  width: 100%;
+  float: left;
+}
+
+.star span .starContainer div .fas.fa-star{
+  font-size: 14px
+}
+.star span .starContainer div .fas.fa-star-half{
+  font-size: 14px;
+  left: -22px;
+}
+
+.container {
+  margin: 0rem 0rem 0rem 7rem;
+  width: 600px;
+}
