@@ -15,21 +15,50 @@ class App extends React.Component {
     super();
     this.state = {
       rating: ['Accuracy', 'Communication', 'Cleanliness', 'Location', 'Check-in', 'Value'],
+      stats: [],
+      reviews: [],
+      page: 1,
+      length: [],
     };
+    this.back = this.back.bind(this);
+    this.next = this.next.bind(this);
   }
 
   componentDidMount() {
-    // this.fetchData();
+    this.fetchData();
   }
 
   fetchData() {
-    axios.get(`/review/${122}`)
+    axios.get(`/review/${159}`)
       .then(({ data }) => {
-        console.log(data);
+        this.setState({ stats: data[0] });
+        this.setState({ reviews: data[0].reviews.slice(0, 7) });
+        this.setState({ length: data[0].reviews.length });
       })
       .catch((err) => {
         console.log(err, 'error');
       });
+  }
+
+  back() {
+    if (this.state.page > 1) {
+      let newPage = this.state.page;
+      newPage -= 1;
+      this.setState({ page: newPage });
+      const newArr = this.state.stats.reviews.slice((newPage - 1) * 7, newPage * 7);
+      this.setState({ reviews: newArr });
+    }
+  }
+
+  next() {
+    const length = Math.ceil(this.state.stats.reviews.length / 7);
+    if (this.state.page < length) {
+      let newPage = this.state.page;
+      newPage += 1;
+      this.setState({ page: this.state.page + 1 });
+      const newArr = this.state.stats.reviews.slice((newPage - 1) * 7, newPage * 7);
+      this.setState({ reviews: newArr });
+    }
   }
 
   render() {
@@ -76,11 +105,11 @@ class App extends React.Component {
               <Ratings rating={six} />
             </div>
           </div>
-          <ReviewList />
+          <ReviewList reviews={this.state.reviews} />
           <div className="bottomNav">
             <div className="scrollBar">
               <span>
-                <NavBar />
+                <NavBar back={this.back} next={this.next} length={this.state.length} />
               </span>
             </div>
           </div>
