@@ -1,0 +1,83 @@
+body {
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+  font-size: 16px;
+  line-height: 1.43;
+  color: #484848;
+  background-color: #fff;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.reviewStar {
+  margin: 0px;
+  word-wrap: break-word;
+  font-size: 24px;
+  font-weight: 740;
+  line-height: 1.25em;
+  color: #484848;
+}
+
+.topReview {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 8px 20px 8px;
+}
+
+.houseStars {
+  display: flex;
+  align-items: center;
+}
+
+.numReviews {
+  margin: 0px 20px 0px 0px;
+}
+
+.magnifi {
+  padding: 7px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  color: #b9b9b9;
+  /* border: solid #348489; */
+  border: solid #ebebeb;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+input {
+  width: 165px;
+  height: 30px;
+  font-weight: 500;
+  font-size: 15px;
+  border: none;
+  outline: none;
+  color: #909090
+}
+::-webkit-input-placeholder {
+  color: #909090
+}
+
+.border {
+  margin-top: -16px;
+  margin-bottom: 16px;
+}
+
+.line {
+  border: solid #ebebeb;
+  border-width: 1px;
+  border-top: 1px;
+  border-right: 1px;
+  border-left: 1px;
+}
+
+.allStars {
+  display: flex;
+  justify-content: center;
+}
+
+.leftStars {
+  margin-right: 20px;
+}
+
