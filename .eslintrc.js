@@ -25,6 +25,7 @@ module.exports = {
         "quotes": ["error", "single"],
         "comma-dangle": ["error"],
         "no-console": "off",
-        "no-undef": "off"
+        "no-undef": "off",
+        "react/prop-types": "off"
     }
 };

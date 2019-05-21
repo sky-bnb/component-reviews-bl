@@ -1,6 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-useless-constructor */
 import React from 'react';
 import axios from 'axios';
 import '../App.css';
@@ -41,28 +38,33 @@ class App extends React.Component {
   }
 
   back() {
-    if (this.state.page > 1) {
-      let newPage = this.state.page;
+    const { page } = this.state;
+    const { stats } = this.state;
+    if (page > 1) {
+      let newPage = page;
       newPage -= 1;
       this.setState({ page: newPage });
-      const newArr = this.state.stats.reviews.slice((newPage - 1) * 7, newPage * 7);
+      const newArr = stats.reviews.slice((newPage - 1) * 7, newPage * 7);
       this.setState({ reviews: newArr });
     }
   }
 
   next() {
-    const length = Math.ceil(this.state.stats.reviews.length / 7);
-    if (this.state.page < length) {
-      let newPage = this.state.page;
+    const { page } = this.state;
+    const { stats } = this.state;
+    const length = Math.ceil(stats.reviews.length / 7);
+    if (page < length) {
+      let newPage = page;
       newPage += 1;
-      this.setState({ page: this.state.page + 1 });
-      const newArr = this.state.stats.reviews.slice((newPage - 1) * 7, newPage * 7);
+      this.setState({ page: page + 1 });
+      const newArr = stats.reviews.slice((newPage - 1) * 7, newPage * 7);
       this.setState({ reviews: newArr });
     }
   }
 
   render() {
-    const [one, two, three, four, five, six] = this.state.rating;
+    const { rating, reviews, length } = this.state;
+    const [one, two, three, four, five, six] = rating;
     return (
       <section className="container">
         <div className="topReview">
@@ -105,11 +107,11 @@ class App extends React.Component {
               <Ratings rating={six} />
             </div>
           </div>
-          <ReviewList reviews={this.state.reviews} />
+          <ReviewList reviews={reviews} />
           <div className="bottomNav">
             <div className="scrollBar">
               <span>
-                <NavBar back={this.back} next={this.next} length={this.state.length} />
+                <NavBar back={this.back} next={this.next} length={length} />
               </span>
             </div>
           </div>
