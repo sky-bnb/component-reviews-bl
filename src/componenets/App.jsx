@@ -26,7 +26,7 @@ class App extends React.Component {
   }
 
   fetchData() {
-    axios.get(`/review/${159}`)
+    axios.get(`/review/${122}`)
       .then(({ data }) => {
         this.setState({ stats: data[0] });
         this.setState({ reviews: data[0].reviews.slice(0, 7) });
@@ -63,20 +63,24 @@ class App extends React.Component {
   }
 
   render() {
-    const { rating, reviews, length } = this.state;
+    const {
+      rating, stats, reviews, length,
+    } = this.state;
     const [one, two, three, four, five, six] = rating;
+
     return (
       <section className="container">
         <div className="topReview">
           <div className="houseStars">
             <h2 className="numReviews">
               <span className="reviewStar">
-                76 Reviews
+                {length}
+                {'Reviews'}
               </span>
             </h2>
             <div>
               <span>
-                <Stars />
+                <Stars star={stats.accuracy} />
               </span>
             </div>
           </div>
@@ -97,14 +101,14 @@ class App extends React.Component {
         <div className="bottomReview">
           <div className="allStars">
             <div className="leftStars">
-              <Ratings rating={one} />
-              <Ratings rating={two} />
-              <Ratings rating={three} />
+              <Ratings rating={one} star={stats.accuracy} />
+              <Ratings rating={two} star={stats.communication} />
+              <Ratings rating={three} star={stats.cleanliness} />
             </div>
             <div className="rightStars">
-              <Ratings rating={four} />
-              <Ratings rating={five} />
-              <Ratings rating={six} />
+              <Ratings rating={four} star={stats.location} />
+              <Ratings rating={five} star={stats.check_in} />
+              <Ratings rating={six} star={stats.value} />
             </div>
           </div>
           <ReviewList reviews={reviews} />
