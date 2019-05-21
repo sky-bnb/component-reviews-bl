@@ -1,19 +1,25 @@
+/* eslint-disable no-useless-constructor */
+/* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 
-const NavBar = () => (
-  <div className="navBar">
-    <ul>
-      <li>
-        <button type="submit">back</button>
-      </li>
-      <li>
+class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div className="navBar">
+        <button type="submit" onClick={this.props.back}>
+        back
+        </button>
         <button type="submit">1</button>
-      </li>
-      <li>
-        <button type="submit">back</button>
-      </li>
-    </ul>
-  </div>
-);
+        <button type="submit" onClick={this.props.next}>
+        forward
+        </button>
+      </div>
+    );
+  }
+}
 
 export default NavBar;
