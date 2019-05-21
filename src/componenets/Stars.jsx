@@ -14,7 +14,6 @@ class Stars extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       const { star } = this.props;
-      console.log(star);
       this.stars(star);
     }, 200);
   }
