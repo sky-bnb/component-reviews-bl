@@ -20,6 +20,7 @@ class App extends React.Component {
       length: [],
       search: '',
       searchFor: [],
+      toggleSearch: [],
       filter: false,
       lookFor: '',
     };
@@ -58,6 +59,7 @@ class App extends React.Component {
       return false;
     });
     this.setState({ searchFor: filter });
+    this.setState({ toggleSearch: filter });
     this.setState({ lookFor: search });
     this.setState({ filter: true });
   }
@@ -82,7 +84,7 @@ class App extends React.Component {
       newPage -= 1;
       this.setState({ page: newPage });
       newArr = searchFor.slice((newPage - 1) * 7, newPage * 7);
-      this.setState({ reviews: newArr });
+      this.setState({ toggleSearch: newArr });
     } else if (page > 1) {
       newPage -= 1;
       this.setState({ page: newPage });
@@ -100,13 +102,13 @@ class App extends React.Component {
     const searchLength = Math.ceil(searchFor.length / 7);
     let newPage = page;
     let newArr;
-
+    console.log(searchFor);
     if (filter && page < searchLength) {
       newPage += 1;
       this.setState({ page: page + 1 });
       newArr = searchFor.slice((newPage - 1) * 7, newPage * 7);
-      this.setState({ reviews: newArr });
-    } else if (page < length) {
+      this.setState({ toggleSearch: newArr });
+    } else if (!filter && page < length) {
       newPage += 1;
       this.setState({ page: page + 1 });
       newArr = stats.reviews.slice((newPage - 1) * 7, newPage * 7);
@@ -120,15 +122,16 @@ class App extends React.Component {
     let newArr;
     if (filter) {
       newArr = searchFor.slice((pageNum - 1) * 7, pageNum * 7);
-    } else {
+      this.setState({ toggleSearch: newArr });
+    } else if (!filter) {
       newArr = stats.reviews.slice((pageNum - 1) * 7, pageNum * 7);
+      this.setState({ reviews: newArr });
     }
-    this.setState({ reviews: newArr });
   }
 
   render() {
     const {
-      rating, stats, reviews, page, length, search, searchFor, filter, lookFor,
+      rating, stats, reviews, page, length, search, searchFor, filter, lookFor, toggleSearch,
     } = this.state;
     const [one, two, three, four, five, six] = rating;
 
@@ -141,7 +144,7 @@ class App extends React.Component {
     let ratingList;
     if (filter) {
       reviewList = (
-        <ReviewList reviews={searchFor} />
+        <ReviewList reviews={toggleSearch} />
       );
       ratingList = (
         <div>
