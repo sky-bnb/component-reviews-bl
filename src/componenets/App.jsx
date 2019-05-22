@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import axios from 'axios';
 import '../App.css';
@@ -19,11 +21,13 @@ class App extends React.Component {
       search: '',
       searchFor: [],
       filter: false,
+      lookFor: '',
     };
     this.back = this.back.bind(this);
     this.next = this.next.bind(this);
     this.newPage = this.newPage.bind(this);
     this.searchFor = this.searchFor.bind(this);
+    this.backToReview = this.backToReview.bind(this);
   }
 
   componentDidMount() {
@@ -53,8 +57,16 @@ class App extends React.Component {
       return false;
     });
     this.setState({ searchFor: filter });
+    this.setState({ lookFor: search });
     this.setState({ filter: true });
-    console.log('test', filter);
+  }
+
+  backToReview(event) {
+    event.preventDefault();
+    this.setState({ search: '' });
+    this.setState({ filter: false });
+
+    console.log('test');
   }
 
   back() {
@@ -91,7 +103,7 @@ class App extends React.Component {
 
   render() {
     const {
-      rating, stats, reviews, page, length, search, searchFor, filter,
+      rating, stats, reviews, page, length, search, searchFor, filter, lookFor,
     } = this.state;
     const [one, two, three, four, five, six] = rating;
 
@@ -115,10 +127,10 @@ class App extends React.Component {
               {'guests have mentioned'}
               {' '}
               <strong>
-                {`"${search}"`}
+                {`"${lookFor}"`}
               </strong>
             </div>
-            <div className="backToReview">
+            <div className="backToReview" onClick={this.backToReview}>
               Back to all reviews
             </div>
           </div>
