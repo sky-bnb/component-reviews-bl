@@ -70,34 +70,51 @@ class App extends React.Component {
   }
 
   back() {
-    const { page } = this.state;
-    const { stats } = this.state;
-    if (page > 1) {
-      let newPage = page;
-      newPage -= 1;
-      this.setState({ page: newPage });
-      const newArr = stats.reviews.slice((newPage - 1) * 7, newPage * 7);
-      this.setState({ reviews: newArr });
+    const {
+      page, stats, filter, searchFor,
+    } = this.state;
+
+    let newPage = page;
+    let newArr;
+    newPage -= 1;
+    this.setState({ page: newPage });
+
+    if (filter && page > 1) {
+      newArr = searchFor.slice((newPage - 1) * 7, newPage * 7);
+    } else if (page > 1) {
+      newArr = stats.reviews.slice((newPage - 1) * 7, newPage * 7);
     }
+    this.setState({ reviews: newArr });
   }
 
   next() {
-    const { page } = this.state;
-    const { stats } = this.state;
+    const {
+      page, stats, filter, searchFor,
+    } = this.state;
+
     const length = Math.ceil(stats.reviews.length / 7);
-    if (page < length) {
-      let newPage = page;
-      newPage += 1;
-      this.setState({ page: page + 1 });
-      const newArr = stats.reviews.slice((newPage - 1) * 7, newPage * 7);
-      this.setState({ reviews: newArr });
+    let newPage = page;
+    let newArr;
+    newPage += 1;
+
+    this.setState({ page: page + 1 });
+    if (filter && page < length) {
+      newArr = searchFor.slice((newPage - 1) * 7, newPage * 7);
+    } else if (page < length) {
+      newArr = stats.reviews.slice((newPage - 1) * 7, newPage * 7);
     }
+    this.setState({ reviews: newArr });
   }
 
   newPage(pageNum) {
-    const { stats } = this.state;
+    const { stats, filter, searchFor } = this.state;
     this.setState({ page: pageNum });
-    const newArr = stats.reviews.slice((pageNum - 1) * 7, pageNum * 7);
+    let newArr;
+    if (filter) {
+      newArr = searchFor.slice((pageNum - 1) * 7, pageNum * 7);
+    } else {
+      newArr = stats.reviews.slice((pageNum - 1) * 7, pageNum * 7);
+    }
     this.setState({ reviews: newArr });
   }
 
@@ -204,6 +221,8 @@ class App extends React.Component {
                 back={this.back}
                 next={this.next}
                 length={length}
+                searchLength={searchFor.length}
+                filter={filter}
                 newPage={this.newPage}
                 page={page}
               />

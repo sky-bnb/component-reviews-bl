@@ -21,10 +21,11 @@ class NavBar extends React.Component {
 
   render() {
     const {
-      back, next, length, newPage, page,
+      back, next, length, searchLength, filter, newPage, page,
     } = this.props;
 
     const pageNum = [];
+
     for (let i = 1; i <= Math.ceil(length / 7); i += 1) {
       pageNum.push(i);
     }
