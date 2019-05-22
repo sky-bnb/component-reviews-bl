@@ -58,6 +58,25 @@ class App extends React.Component {
       }
       return false;
     });
+    let result;
+    for (let i = 0; i < filter.length; i += 1) {
+      const rev = filter[i];
+      const newArr = rev.review.split(' ');
+      for (let j = 0; j < newArr.length; j += 1) {
+        const word = newArr[j];
+        if (word === search) {
+          newArr[i] = (
+            <strong>
+              {`${search}`}
+            </strong>
+          );
+          result = newArr.join(' ');
+          console.log('this is the result', result);
+          // rev.review = result;
+        }
+      }
+    }
+    console.log('this is the filter', filter);
     this.setState({ searchFor: filter });
     this.setState({ toggleSearch: filter });
     this.setState({ lookFor: search });
@@ -141,7 +160,7 @@ class App extends React.Component {
     let ratingList;
     if (filter) {
       reviewList = (
-        <ReviewList reviews={toggleSearch} filter={filter} lookFor={lookFor} />
+        <ReviewList reviews={toggleSearch} />
       );
       ratingList = (
         <div>

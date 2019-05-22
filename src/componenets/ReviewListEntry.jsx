@@ -7,26 +7,14 @@ import '../ReviewListEntry.css';
 class ReviewListEntry extends React.Component {
   constructor(props) {
     super(props);
-    const { review, filter } = this.props;
     this.state = {
       expanded: false,
-      boldSearch: review.review,
-      search: filter,
     };
   }
 
-  // strong(arr, find) {
-    // BUGGY BOLD SEARCH FEATURE NEED TO FIX
-    // const newArr = arr.split(' ');
-    // const index = newArr.indexOf(find);
-    // newArr[index] = `<strong>${find}<strong>`;
-    // const result = newArr.join(' ');
-    // return result;
-  // }
-
   render() {
-    const { review, lookFor } = this.props;
-    const { expanded, boldSearch, search } = this.state;
+    const { review } = this.props;
+    const { expanded } = this.state;
     const toggledClass = expanded ? 'expanded' : 'collapsed';
     const arr = review.review.split(' ');
     let read;
@@ -41,16 +29,6 @@ class ReviewListEntry extends React.Component {
         </div>
       );
     }
-    // console.log(search);
-    // let reviewDescription;
-    // if (search && lookFor.length > 1) {
-    //   // BUGGY BOLD SEARCH FEATURE NEED TO FIX
-    //   const result = this.strong(boldSearch, lookFor);
-    //   console.log(result);
-    //   // this.setState({ boldSearch: result });
-    // } else {
-    //   reviewDescription = review.review;
-    // }
 
     return (
       <div className="eachReview">
