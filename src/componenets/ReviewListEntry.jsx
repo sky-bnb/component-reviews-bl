@@ -15,14 +15,14 @@ class ReviewListEntry extends React.Component {
     };
   }
 
-  strong(arr, find) {
+  // strong(arr, find) {
     // BUGGY BOLD SEARCH FEATURE NEED TO FIX
-    const newArr = arr.split(' ');
-    const index = newArr.indexOf(find);
-    newArr[index] = `<strong>${find}<strong>`;
+    // const newArr = arr.split(' ');
+    // const index = newArr.indexOf(find);
+    // newArr[index] = `<strong>${find}<strong>`;
     // const result = newArr.join(' ');
     // return result;
-  }
+  // }
 
   render() {
     const { review, lookFor } = this.props;
@@ -41,16 +41,16 @@ class ReviewListEntry extends React.Component {
         </div>
       );
     }
-    console.log(search);
-    let reviewDescription;
-    if (search && lookFor.length > 1) {
-      // BUGGY BOLD SEARCH FEATURE NEED TO FIX
-      const result = this.strong(boldSearch, lookFor);
-      console.log(result);
-      // this.setState({ boldSearch: result });
-    } else {
-      reviewDescription = review.review;
-    }
+    // console.log(search);
+    // let reviewDescription;
+    // if (search && lookFor.length > 1) {
+    //   // BUGGY BOLD SEARCH FEATURE NEED TO FIX
+    //   const result = this.strong(boldSearch, lookFor);
+    //   console.log(result);
+    //   // this.setState({ boldSearch: result });
+    // } else {
+    //   reviewDescription = review.review;
+    // }
 
     return (
       <div className="eachReview">
@@ -69,7 +69,7 @@ class ReviewListEntry extends React.Component {
         </div>
         <div className="mid">
           <div className={toggledClass}>
-            {reviewDescription}
+            {review.review}
           </div>
           {read}
         </div>
