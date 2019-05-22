@@ -1,0 +1,39 @@
+.navBar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.clicked {
+  width: 32px !important;
+  height: 32px !important;
+  text-align: center !important;
+  background-color: rgb(0, 132, 137) !important;
+  color: rgb(255, 255, 255) !important;
+  border-radius: 16px !important;
+}
+
+button.nav{
+  align-items: center !important;
+  background-color: transparent !important;
+  box-shadow: rgb(0, 132, 137) 0px 0px 0px 1px inset !important;
+  color: rgb(0, 132, 137) !important;
+  display: flex !important;
+  height: 32px !important;
+  justify-content: center !important;
+  width: 32px !important;
+  border-radius: 50% !important;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.num {
+  width: 32px !important;
+  color: rgb(0, 132, 137) !important;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 14px;
+  cursor: pointer;
+}

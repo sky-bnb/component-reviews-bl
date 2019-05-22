@@ -19,6 +19,7 @@ class App extends React.Component {
     };
     this.back = this.back.bind(this);
     this.next = this.next.bind(this);
+    this.newPage = this.newPage.bind(this);
   }
 
   componentDidMount() {
@@ -62,9 +63,16 @@ class App extends React.Component {
     }
   }
 
+  newPage(pageNum) {
+    const { stats } = this.state;
+    this.setState({ page: pageNum });
+    const newArr = stats.reviews.slice((pageNum - 1) * 7, pageNum * 7);
+    this.setState({ reviews: newArr });
+  }
+
   render() {
     const {
-      rating, stats, reviews, length,
+      rating, stats, reviews, page, length,
     } = this.state;
     const [one, two, three, four, five, six] = rating;
 
@@ -75,6 +83,7 @@ class App extends React.Component {
             <h2 className="numReviews">
               <span className="reviewStar">
                 {length}
+                {' '}
                 {'Reviews'}
               </span>
             </h2>
@@ -114,11 +123,18 @@ class App extends React.Component {
           <ReviewList reviews={reviews} />
           <div className="bottomNav">
             <div className="scrollBar">
-              <span>
-                <NavBar back={this.back} next={this.next} length={length} />
-              </span>
+              <NavBar
+                back={this.back}
+                next={this.next}
+                length={length}
+                newPage={this.newPage}
+                page={page}
+              />
             </div>
           </div>
+          <h2>
+          Hosted by Living The Dream
+          </h2>
         </div>
       </section>
     );

@@ -1,26 +1,69 @@
 import React from 'react';
+import '../NavBar.css';
 
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      click: 'num',
     };
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    const { click } = this.state;
+    if (click === 'num') {
+      this.setState({ click: 'clicked' });
+    } else if (click === 'clicked') {
+      this.setState({ click: 'num' });
+    }
   }
 
   render() {
-    const { back } = this.props;
-    const { next } = this.props;
+    const {
+      back, next, length, newPage, page,
+    } = this.props;
+
+    const pageNum = [];
+    for (let i = 1; i <= Math.ceil(length / 7); i += 1) {
+      pageNum.push(i);
+    }
 
     return (
       <div className="navBar">
-        <button type="submit" onClick={back}>
-        back
-        </button>
-        <button type="submit">1</button>
-        <button type="submit" onClick={next}>
-        forward
-        </button>
+        <div>
+          <button type="submit" className="nav" onClick={back}>
+            <i className="fas fa-chevron-left" />
+          </button>
+        </div>
+        {
+          pageNum.map(key => (
+            page === key ? (
+              <button
+                type="submit"
+                key={key}
+                className="clicked"
+                onClick={() => newPage(key)}
+              >
+                {key}
+              </button>
+            ) : (
+              <button
+                type="submit"
+                key={key}
+                className="num"
+                onClick={() => newPage(key)}
+              >
+                {key}
+              </button>
+            )
+          ))
+        }
+        <div>
+          <button type="submit" className="nav" onClick={next}>
+            <i className="fas fa-chevron-right" />
+          </button>
+        </div>
       </div>
     );
   }
