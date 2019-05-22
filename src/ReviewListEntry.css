@@ -39,4 +39,24 @@
   margin: 10px 0px 25px 0px;
 }
 
+.collapsed {
+  overflow: hidden;
+  height: 65px;
+}
+  
+.expanded {
+  overflow: visible;
+  height: auto;
+}
+
+.read {
+  color: rgb(0, 132, 137) !important;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 15px !important;
+}
+
+  
+
 
