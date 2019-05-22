@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import '../ReviewListEntry.css';
 
@@ -18,13 +20,12 @@ class ReviewListEntry extends React.Component {
 
     if (arr.length > 40) {
       read = (
-        <button
-          type="submit"
+        <div
           className="read"
           onClick={() => this.setState({ expanded: true })}
         >
           {!expanded ? '...Read more' : ''}
-        </button>
+        </div>
       );
     }
 

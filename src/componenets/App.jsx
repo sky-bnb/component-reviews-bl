@@ -16,10 +16,14 @@ class App extends React.Component {
       reviews: [],
       page: 1,
       length: [],
+      search: '',
+      searchFor: [],
+      filter: false,
     };
     this.back = this.back.bind(this);
     this.next = this.next.bind(this);
     this.newPage = this.newPage.bind(this);
+    this.searchFor = this.searchFor.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +41,20 @@ class App extends React.Component {
       .catch((err) => {
         console.log(err, 'error');
       });
+  }
+
+  searchFor(event) {
+    event.preventDefault();
+    const { stats, search } = this.state;
+    const filter = stats.reviews.filter((rev) => {
+      if (rev.review.includes(search)) {
+        return rev;
+      }
+      return false;
+    });
+    this.setState({ searchFor: filter });
+    this.setState({ filter: true });
+    console.log('test', filter);
   }
 
   back() {
@@ -73,9 +91,61 @@ class App extends React.Component {
 
   render() {
     const {
-      rating, stats, reviews, page, length,
+      rating, stats, reviews, page, length, search, searchFor, filter,
     } = this.state;
     const [one, two, three, four, five, six] = rating;
+
+    let find = 'search';
+    if (search.length > 0) {
+      find = 'find';
+    }
+
+    let reviewList;
+    let ratingList;
+    if (filter) {
+      reviewList = (
+        <ReviewList reviews={searchFor} />
+      );
+      ratingList = (
+        <div>
+          <div className="searchFilter">
+            <div>
+              {searchFor.length}
+              {' '}
+              {'guests have mentioned'}
+              {' '}
+              <strong>
+                {`"${search}"`}
+              </strong>
+            </div>
+            <div className="backToReview">
+              Back to all reviews
+            </div>
+          </div>
+          <div className="border">
+            <div className="line">&nbsp;</div>
+          </div>
+        </div>
+      );
+    } else {
+      reviewList = (
+        <ReviewList reviews={reviews} />
+      );
+      ratingList = (
+        <div className="allStars">
+          <div className="leftStars">
+            <Ratings rating={one} star={stats.accuracy} />
+            <Ratings rating={two} star={stats.communication} />
+            <Ratings rating={three} star={stats.cleanliness} />
+          </div>
+          <div className="rightStars">
+            <Ratings rating={four} star={stats.location} />
+            <Ratings rating={five} star={stats.check_in} />
+            <Ratings rating={six} star={stats.value} />
+          </div>
+        </div>
+      );
+    }
 
     return (
       <section className="container">
@@ -95,13 +165,18 @@ class App extends React.Component {
             </div>
           </div>
           <div>
-            <div className="search">
+            <div className={find}>
               <div className="magnifi">
                 <i className="fas fa-search" />
               </div>
-              <div className="input">
-                <input type="text" className="inputBox" placeholder="Search reviews" />
-              </div>
+              <form className="input" onSubmit={this.searchFor}>
+                <input
+                  type="text"
+                  className="inputBox"
+                  placeholder="Search reviews"
+                  onChange={e => this.setState({ search: e.target.value })}
+                />
+              </form>
             </div>
           </div>
         </div>
@@ -109,19 +184,8 @@ class App extends React.Component {
           <div className="line">&nbsp;</div>
         </div>
         <div className="bottomReview">
-          <div className="allStars">
-            <div className="leftStars">
-              <Ratings rating={one} star={stats.accuracy} />
-              <Ratings rating={two} star={stats.communication} />
-              <Ratings rating={three} star={stats.cleanliness} />
-            </div>
-            <div className="rightStars">
-              <Ratings rating={four} star={stats.location} />
-              <Ratings rating={five} star={stats.check_in} />
-              <Ratings rating={six} star={stats.value} />
-            </div>
-          </div>
-          <ReviewList reviews={reviews} />
+          {ratingList}
+          {reviewList}
           <div className="bottomNav">
             <div className="scrollBar">
               <NavBar
@@ -133,9 +197,6 @@ class App extends React.Component {
               />
             </div>
           </div>
-          <h2>
-          Hosted by Living The Dream
-          </h2>
         </div>
       </section>
     );
