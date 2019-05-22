@@ -50,6 +50,7 @@ class App extends React.Component {
   searchFor(event) {
     event.preventDefault();
     const { stats, search } = this.state;
+    this.setState({ page: 1 });
     const filter = stats.reviews.filter((rev) => {
       if (rev.review.includes(search)) {
         return rev;
@@ -76,15 +77,18 @@ class App extends React.Component {
 
     let newPage = page;
     let newArr;
-    newPage -= 1;
-    this.setState({ page: newPage });
 
     if (filter && page > 1) {
+      newPage -= 1;
+      this.setState({ page: newPage });
       newArr = searchFor.slice((newPage - 1) * 7, newPage * 7);
+      this.setState({ reviews: newArr });
     } else if (page > 1) {
+      newPage -= 1;
+      this.setState({ page: newPage });
       newArr = stats.reviews.slice((newPage - 1) * 7, newPage * 7);
+      this.setState({ reviews: newArr });
     }
-    this.setState({ reviews: newArr });
   }
 
   next() {
@@ -93,17 +97,21 @@ class App extends React.Component {
     } = this.state;
 
     const length = Math.ceil(stats.reviews.length / 7);
+    const searchLength = Math.ceil(searchFor.length / 7);
     let newPage = page;
     let newArr;
-    newPage += 1;
 
-    this.setState({ page: page + 1 });
-    if (filter && page < length) {
+    if (filter && page < searchLength) {
+      newPage += 1;
+      this.setState({ page: page + 1 });
       newArr = searchFor.slice((newPage - 1) * 7, newPage * 7);
+      this.setState({ reviews: newArr });
     } else if (page < length) {
+      newPage += 1;
+      this.setState({ page: page + 1 });
       newArr = stats.reviews.slice((newPage - 1) * 7, newPage * 7);
+      this.setState({ reviews: newArr });
     }
-    this.setState({ reviews: newArr });
   }
 
   newPage(pageNum) {

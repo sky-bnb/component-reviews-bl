@@ -25,10 +25,16 @@ class NavBar extends React.Component {
     } = this.props;
 
     const pageNum = [];
-
-    for (let i = 1; i <= Math.ceil(length / 7); i += 1) {
-      pageNum.push(i);
+    if (filter) {
+      for (let i = 1; i <= Math.ceil(searchLength / 7); i += 1) {
+        pageNum.push(i);
+      }
+    } else {
+      for (let i = 1; i <= Math.ceil(length / 7); i += 1) {
+        pageNum.push(i);
+      }
     }
+
 
     return (
       <div className="navBar">
