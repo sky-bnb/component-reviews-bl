@@ -68,8 +68,6 @@ class App extends React.Component {
     event.preventDefault();
     this.setState({ search: '' });
     this.setState({ filter: false });
-
-    console.log('test');
   }
 
   back() {
@@ -102,7 +100,6 @@ class App extends React.Component {
     const searchLength = Math.ceil(searchFor.length / 7);
     let newPage = page;
     let newArr;
-    console.log(searchFor);
     if (filter && page < searchLength) {
       newPage += 1;
       this.setState({ page: page + 1 });
@@ -144,7 +141,7 @@ class App extends React.Component {
     let ratingList;
     if (filter) {
       reviewList = (
-        <ReviewList reviews={toggleSearch} />
+        <ReviewList reviews={toggleSearch} filter={filter} lookFor={lookFor} />
       );
       ratingList = (
         <div>

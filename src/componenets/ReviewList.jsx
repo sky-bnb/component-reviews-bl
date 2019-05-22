@@ -3,9 +3,17 @@
 import React from 'react';
 import ReviewListEntry from './ReviewListEntry';
 
-const ReviewList = ({ reviews }) => (
+const ReviewList = ({ reviews, filter, lookFor }) => (
   <div className="allReviews">
-    {reviews.map((review, key) => <ReviewListEntry key={key} review={review} />)}
+    {reviews.map((review, key) => (
+      <ReviewListEntry
+        key={key}
+        review={review}
+        filter={filter}
+        lookFor={lookFor}
+      />
+    ))
+    }
   </div>
 );
 
