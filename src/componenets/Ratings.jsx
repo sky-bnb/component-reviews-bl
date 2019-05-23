@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import Stars from './Stars';
 import '../Ratings.css';
 
-const Ratings = ({ rating }) => (
+const Ratings = ({ rating, star }) => (
   <div className="starRow">
     <div className="word">
       <span>
@@ -12,7 +11,7 @@ const Ratings = ({ rating }) => (
     </div>
     <div className="star">
       <span>
-        <Stars />
+        <Stars star={star} />
       </span>
     </div>
   </div>

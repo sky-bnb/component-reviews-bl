@@ -40,11 +40,20 @@ body {
   display: flex;
   align-items: center;
   color: #b9b9b9;
-  /* border: solid #348489; */
   border: solid #ebebeb;
   border-radius: 5px;
   border-width: 1px;
 }
+
+.find {
+  display: flex;
+  align-items: center;
+  color: #b9b9b9;
+  border: solid #348489;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
 
 input {
   width: 165px;
@@ -53,7 +62,7 @@ input {
   font-size: 15px;
   border: none;
   outline: none;
-  color: #909090
+  color: #696969
 }
 ::-webkit-input-placeholder {
   color: #909090
@@ -79,5 +88,31 @@ input {
 
 .leftStars {
   margin-right: 20px;
+}
+
+.allReviews {
+  margin-top: 25px;
+}
+
+.bottomNav {
+  margin: 0px 0px 90px 0px;
+}
+
+.searchFilter {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.backToReview {
+  color: #348489;
+  cursor: pointer;
+}
+
+.backToReview:hover {
+  color: #348489;
+  cursor: pointer;
+  text-decoration: underline;
 }
 

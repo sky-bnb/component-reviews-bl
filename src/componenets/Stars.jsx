@@ -1,6 +1,5 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-unused-state */
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import '../Stars.css';
 
@@ -13,7 +12,10 @@ class Stars extends React.Component {
   }
 
   componentDidMount() {
-    this.stars(45);
+    setTimeout(() => {
+      const { star } = this.props;
+      this.stars(star);
+    }, 200);
   }
 
   stars(num) {
@@ -53,10 +55,11 @@ class Stars extends React.Component {
         <i className="fas fa-star" />
       </div>
     );
+    const { rating } = this.state;
 
     return (
       <div className="starContainer">
-        { this.state.rating.map(el => (el === 'empty' ? empty : (el === 'half' ? half : full)))
+        { rating.map(el => (el === 'empty' ? empty : (el === 'half' ? half : full)))
         }
       </div>
     );
