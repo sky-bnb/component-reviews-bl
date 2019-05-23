@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
@@ -19,7 +20,7 @@ class App extends React.Component {
       page: 1,
       length: [],
       search: '',
-      searchFor: [],
+      searchedRev: [],
       toggleSearch: [],
       filter: false,
       lookFor: '',
@@ -37,7 +38,7 @@ class App extends React.Component {
 
   fetchData() {
     const randomNum = (min, max) => Math.floor(Math.random() * (max + 1 - min) + min);
-    axios.get(`/review/${randomNum(100, 200)}`)
+    axios.get(`/review/${randomNum(101, 200)}`)
       .then(({ data }) => {
         this.setState({ stats: data[0] });
         this.setState({ reviews: data[0].reviews.slice(0, 7) });
@@ -71,13 +72,11 @@ class App extends React.Component {
             </strong>
           );
           result = newArr.join(' ');
-          console.log('this is the result', result);
           // rev.review = result;
         }
       }
     }
-    console.log('this is the filter', filter);
-    this.setState({ searchFor: filter });
+    this.setState({ searchedRev: filter });
     this.setState({ toggleSearch: filter });
     this.setState({ lookFor: search });
     this.setState({ filter: true });
@@ -91,7 +90,7 @@ class App extends React.Component {
 
   back() {
     const {
-      page, stats, filter, searchFor,
+      page, stats, filter, searchedRev,
     } = this.state;
 
     let newPage = page;
@@ -100,7 +99,7 @@ class App extends React.Component {
     if (filter && page > 1) {
       newPage -= 1;
       this.setState({ page: newPage });
-      newArr = searchFor.slice((newPage - 1) * 7, newPage * 7);
+      newArr = searchedRev.slice((newPage - 1) * 7, newPage * 7);
       this.setState({ toggleSearch: newArr });
     } else if (page > 1) {
       newPage -= 1;
@@ -112,17 +111,17 @@ class App extends React.Component {
 
   next() {
     const {
-      page, stats, filter, searchFor,
+      page, stats, filter, searchedRev,
     } = this.state;
 
     const length = Math.ceil(stats.reviews.length / 7);
-    const searchLength = Math.ceil(searchFor.length / 7);
+    const searchLength = Math.ceil(searchedRev.length / 7);
     let newPage = page;
     let newArr;
     if (filter && page < searchLength) {
       newPage += 1;
       this.setState({ page: page + 1 });
-      newArr = searchFor.slice((newPage - 1) * 7, newPage * 7);
+      newArr = searchedRev.slice((newPage - 1) * 7, newPage * 7);
       this.setState({ toggleSearch: newArr });
     } else if (!filter && page < length) {
       newPage += 1;
@@ -133,11 +132,11 @@ class App extends React.Component {
   }
 
   newPage(pageNum) {
-    const { stats, filter, searchFor } = this.state;
+    const { stats, filter, searchedRev } = this.state;
     this.setState({ page: pageNum });
     let newArr;
     if (filter) {
-      newArr = searchFor.slice((pageNum - 1) * 7, pageNum * 7);
+      newArr = searchedRev.slice((pageNum - 1) * 7, pageNum * 7);
       this.setState({ toggleSearch: newArr });
     } else if (!filter) {
       newArr = stats.reviews.slice((pageNum - 1) * 7, pageNum * 7);
@@ -147,9 +146,9 @@ class App extends React.Component {
 
   render() {
     const {
-      rating, stats, reviews, page, length, search, searchFor, filter, lookFor, toggleSearch,
+      rating, stats, reviews, page, length, search, searchedRev, filter, lookFor, toggleSearch,
     } = this.state;
-    const [one, two, three, four, five, six] = rating;
+    const [accuracy, communication, cleanliness, location, checkin, value] = rating;
 
     let find = 'search';
     if (search.length > 0) {
@@ -166,7 +165,7 @@ class App extends React.Component {
         <div>
           <div className="searchFilter">
             <div>
-              {searchFor.length}
+              {searchedRev.length}
               {' '}
               {'guests have mentioned'}
               {' '}
@@ -190,14 +189,14 @@ class App extends React.Component {
       ratingList = (
         <div className="allStars">
           <div className="leftStars">
-            <Ratings rating={one} star={stats.accuracy} />
-            <Ratings rating={two} star={stats.communication} />
-            <Ratings rating={three} star={stats.cleanliness} />
+            <Ratings rating={accuracy} star={stats.accuracy} />
+            <Ratings rating={communication} star={stats.communication} />
+            <Ratings rating={cleanliness} star={stats.cleanliness} />
           </div>
           <div className="rightStars">
-            <Ratings rating={four} star={stats.location} />
-            <Ratings rating={five} star={stats.check_in} />
-            <Ratings rating={six} star={stats.value} />
+            <Ratings rating={location} star={stats.location} />
+            <Ratings rating={checkin} star={stats.check_in} />
+            <Ratings rating={value} star={stats.value} />
           </div>
         </div>
       );
@@ -248,7 +247,7 @@ class App extends React.Component {
                 back={this.back}
                 next={this.next}
                 length={length}
-                searchLength={searchFor.length}
+                searchLength={searchedRev.length}
                 filter={filter}
                 newPage={this.newPage}
                 page={page}
