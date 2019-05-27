@@ -25,6 +25,7 @@ class App extends React.Component {
       toggleSearch: [],
       filter: false,
       lookFor: '',
+      rendered: false,
     };
     this.back = this.back.bind(this);
     this.next = this.next.bind(this);
@@ -44,6 +45,7 @@ class App extends React.Component {
         this.setState({ stats: data[0] });
         this.setState({ reviews: data[0].reviews.slice(0, 7) });
         this.setState({ length: data[0].reviews.length });
+        this.setState({ rendered: true });
       })
       .catch((err) => {
         console.log(err, 'error');
@@ -161,7 +163,8 @@ class App extends React.Component {
 
   render() {
     const {
-      rating, stats, reviews, page, length, search, searchedRev, filter, lookFor, toggleSearch,
+      rating, stats, reviews, page, length, search,
+      searchedRev, filter, lookFor, toggleSearch, rendered,
     } = this.state;
     const [accuracy, communication, cleanliness, location, checkin, value] = rating;
 
@@ -253,23 +256,27 @@ class App extends React.Component {
         <div className="border">
           <div className="line">&nbsp;</div>
         </div>
-        <div className="bottomReview">
-          {ratingList}
-          {reviewList}
-          <div className="bottomNav">
-            <div className="scrollBar">
-              <NavBar
-                back={this.back}
-                next={this.next}
-                length={length}
-                searchLength={searchedRev.length}
-                filter={filter}
-                newPage={this.newPage}
-                page={page}
-              />
+        { rendered
+          ? (
+            <div className="bottomReview">
+              {ratingList}
+              {reviewList}
+              <div className="bottomNav">
+                <div className="scrollBar">
+                  <NavBar
+                    back={this.back}
+                    next={this.next}
+                    length={length}
+                    searchLength={searchedRev.length}
+                    filter={filter}
+                    newPage={this.newPage}
+                    page={page}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          ) : <p className="saving"><span>.</span><span>.</span><span>.</span></p>
+        }
       </section>
     );
   }
