@@ -36,4 +36,3 @@ From the root directory of this service, run `npm run build`. This will generate
 
 #### Running the Server
 From the root directory of this service, run `npm run start`. This will start up a localhost on port 3001 with the client files. Open a web browser and visit `http://localhost:3001/`.
-
