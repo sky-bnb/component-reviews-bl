@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 
 const app = express();
 const port = 3001;
@@ -8,6 +9,10 @@ const { getHouse } = require('./models/modal');
 
 app.use(bodyParser.json());
 app.use(express.static('./public/dist'));
+
+app.get('/:propertyId', (req, res) => {
+  res.sendfile(path.join(__dirname, '/../public/dist/index.html'));
+});
 
 app.use('/review/:id', (req, res) => {
   const id = Number(req.params.id);

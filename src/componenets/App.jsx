@@ -37,8 +37,9 @@ class App extends React.Component {
   }
 
   fetchData() {
-    const randomNum = (min, max) => Math.floor(Math.random() * (max + 1 - min) + min);
-    axios.get(`/review/${randomNum(101, 200)}`)
+    // const randomNum = (min, max) => Math.floor(Math.random() * (max + 1 - min) + min);
+    const { id } = this.props;
+    axios.get(`/review/${id}`)
       .then(({ data }) => {
         this.setState({ stats: data[0] });
         this.setState({ reviews: data[0].reviews.slice(0, 7) });
