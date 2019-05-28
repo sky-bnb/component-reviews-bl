@@ -31,12 +31,12 @@ db.once('open', () => {
     };
 
     const randomReview = () => {
-      for (let j = 0; j < randomNum(15, 125); j += 1) {
+      for (let j = 0; j < randomNum(40, 100); j += 1) {
         const reviewObj = {
           review_id: j,
           name: faker.name.findName(),
           avatar: faker.image.avatar(),
-          review: faker.lorem.sentences(randomNum(3, 7)),
+          review: faker.lorem.sentences(randomNum(3, 20)),
           date_created: monthGenerator(),
         };
         houseObj.reviews.push(reviewObj);
