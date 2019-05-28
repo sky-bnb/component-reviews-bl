@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express');
 const path = require('path');
 
@@ -11,8 +12,10 @@ app.use(bodyParser.json());
 app.use(express.static('./public/dist'));
 
 app.get('/:propertyId', (req, res) => {
-  res.sendfile(path.join(__dirname, '/../public/dist/index.html'));
+  res.sendFile(path.join(__dirname, '/../public/dist/index.html'));
 });
+
+app.use(cors());
 
 app.use('/review/:id', (req, res) => {
   const id = Number(req.params.id);

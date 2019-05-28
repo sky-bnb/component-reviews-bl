@@ -39,7 +39,7 @@ class App extends React.Component {
   fetchData() {
     // const randomNum = (min, max) => Math.floor(Math.random() * (max + 1 - min) + min);
     const { id } = this.props;
-    axios.get(`/review/${id}`)
+    axios.get(`http://127.0.0.1:3001/review/${id}`)
       .then(({ data }) => {
         this.setState({ stats: data[0] });
         this.setState({ reviews: data[0].reviews.slice(0, 7) });
