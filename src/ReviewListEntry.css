@@ -9,9 +9,15 @@
 }
 
 .userName {
+<<<<<<< HEAD
   font-size: 16px;
   font-weight: 600;
   line-height: 1.375em;
+=======
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.375em !important;
+>>>>>>> 794495a678105e89e3a5d24c8eb83c2ee3b831fa
 }
 
 .reviewDate {
