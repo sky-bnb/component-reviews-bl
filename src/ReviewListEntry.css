@@ -9,15 +9,15 @@
 }
 
 .userName {
-  font-size: 18px !important;
-  font-weight: 600 !important;
-  line-height: 1.375em !important;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.375em;
 }
 
 .reviewDate {
-  font-size: 14px !important;
-  font-weight: 400 !important;
-  line-height: 1.2857142857142858em !important;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2857142857142858em;
 }
 
 .top {
@@ -50,19 +50,19 @@
 }
 
 .read {
-  color: rgb(0, 132, 137) !important;
+  color: rgb(0, 132, 137);
   cursor: pointer;
   border: none;
   background: none;
-  font-size: 15px !important;
+  font-size: 15px;
   margin: 0px 0px 0px -10px;
 }
 .read:hover {
-  color: rgb(0, 132, 137) !important;
+  color: rgb(0, 132, 137);
   cursor: pointer;
   border: none;
   background: none;
-  font-size: 15px !important;
+  font-size: 15px;
   margin: 0px 0px 0px -10px;
   text-decoration: underline;
 }

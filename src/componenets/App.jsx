@@ -203,7 +203,7 @@ class App extends React.Component {
     }
 
     return (
-      <section className="container">
+      <section>
         <div className="topReview">
           <div className="houseStars">
             <h2 className="numReviews">
