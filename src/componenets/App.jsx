@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -24,6 +25,7 @@ class App extends React.Component {
       toggleSearch: [],
       filter: false,
       lookFor: '',
+      rendered: false,
     };
     this.back = this.back.bind(this);
     this.next = this.next.bind(this);
@@ -43,6 +45,7 @@ class App extends React.Component {
         this.setState({ stats: data[0] });
         this.setState({ reviews: data[0].reviews.slice(0, 7) });
         this.setState({ length: data[0].reviews.length });
+        this.setState({ rendered: true });
       })
       .catch((err) => {
         console.log(err, 'error');
@@ -88,6 +91,14 @@ class App extends React.Component {
     this.setState({ filter: false });
   }
 
+  window() {
+    window.scrollTo({
+      top: 1860,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
+
   back() {
     const {
       page, stats, filter, searchedRev,
@@ -101,11 +112,13 @@ class App extends React.Component {
       this.setState({ page: newPage });
       newArr = searchedRev.slice((newPage - 1) * 7, newPage * 7);
       this.setState({ toggleSearch: newArr });
+      this.window();
     } else if (page > 1) {
       newPage -= 1;
       this.setState({ page: newPage });
       newArr = stats.reviews.slice((newPage - 1) * 7, newPage * 7);
       this.setState({ reviews: newArr });
+      this.window();
     }
   }
 
@@ -123,11 +136,13 @@ class App extends React.Component {
       this.setState({ page: page + 1 });
       newArr = searchedRev.slice((newPage - 1) * 7, newPage * 7);
       this.setState({ toggleSearch: newArr });
+      this.window();
     } else if (!filter && page < length) {
       newPage += 1;
       this.setState({ page: page + 1 });
       newArr = stats.reviews.slice((newPage - 1) * 7, newPage * 7);
       this.setState({ reviews: newArr });
+      this.window();
     }
   }
 
@@ -138,15 +153,17 @@ class App extends React.Component {
     if (filter) {
       newArr = searchedRev.slice((pageNum - 1) * 7, pageNum * 7);
       this.setState({ toggleSearch: newArr });
+      this.window();
     } else if (!filter) {
       newArr = stats.reviews.slice((pageNum - 1) * 7, pageNum * 7);
       this.setState({ reviews: newArr });
+      this.window();
     }
   }
 
   render() {
     const {
-      rating, stats, reviews, page, length, search, searchedRev, filter, lookFor, toggleSearch,
+      rating, stats, reviews, page, length, search, searchedRev, filter, lookFor, toggleSearch, rendered,
     } = this.state;
     const [accuracy, communication, cleanliness, location, checkin, value] = rating;
 
@@ -238,23 +255,28 @@ class App extends React.Component {
         <div className="border">
           <div className="line">&nbsp;</div>
         </div>
-        <div className="bottomReview">
-          {ratingList}
-          {reviewList}
-          <div className="bottomNav">
-            <div className="scrollBar">
-              <NavBar
-                back={this.back}
-                next={this.next}
-                length={length}
-                searchLength={searchedRev.length}
-                filter={filter}
-                newPage={this.newPage}
-                page={page}
-              />
+        { rendered
+          ? (
+            <div className="bottomReview">
+              {ratingList}
+              {reviewList}
+              <div className="bottomNav">
+                <div className="scrollBar">
+                  <NavBar
+                    back={this.back}
+                    next={this.next}
+                    length={length}
+                    searchLength={searchedRev.length}
+                    filter={filter}
+                    newPage={this.newPage}
+                    page={page}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          ) : <p className="saving"><span>.</span><span>.</span><span>.</span></p>
+        }
+
       </section>
     );
   }
