@@ -8,8 +8,8 @@ WORKDIR /src/app
 
 COPY . /src/app
 
-RUN install
+RUN npm install
 
 EXPOSE 3001
 
-CMD ["npm", "run", "production"]
+CMD [ "npm", "run", "production" ]
