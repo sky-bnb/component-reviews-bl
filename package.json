@@ -14,10 +14,11 @@
   "description": "Review componenet for Skybnb",
   "main": "index.jsx",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js",
     "build": "webpack --watch",
     "seed-data": "node server/dbs/data.seed.js",
-    "test": "jest"
+    "test": "jest",
+    "production": "npm run seed-data && npm start"
   },
   "repository": {
     "type": "git",
