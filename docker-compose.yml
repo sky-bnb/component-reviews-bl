@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  component-reviews-bl:
+    image: component-reviews-bl
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3001:3001
